@@ -1,0 +1,37 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+    background-color: #ff4949;
+    color: #fff;
+    border-radius: 15px 15px 0 0;
+}
+.form-control {
+    border-radius: 10px;
+    border-color: #ccc;
+}
+.btn-primary {
+    border-radius: 10px;
+    background-color: #ff2c2c;
+    border-color: #007bff;
+    transition: all 0.3s;
+}
+.btn-primary:hover {
+    background-color: #ff4949;
+    border-color: #0056b3;
+}
+.result-text {
+    margin-top: 20px;
+    font-size: 18px;
+}

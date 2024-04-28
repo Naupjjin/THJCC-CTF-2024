@@ -1,0 +1,1 @@
+FLAG="THJCC{F1nd_F1ag_2ut0m2t1c_mach1n3!!!}"

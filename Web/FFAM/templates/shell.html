@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FFAM</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+<body>
+<div id="console2">[System-FFAM]RAM:{{RAM}}GB | Storage:128GB</div>
+<div id="console"></div>
+
+<form id="userInputForm" style="display:none;">
+    <div id="userInputWrapper" style="display:flex; align-items:center; background-color: black;">
+        <span style="color: rgb(119, 160, 255); margin-right: 8px;">[User@FFAM]</span>
+        <input type="text" id="userInput" name="userInput" required
+          style="flex-grow:1; background-color: black; color: rgb(119, 160, 255); border: none; outline: none;">
+      </div>
+      
+
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+var consoleElement = document.getElementById('console');
+var text = "\nVerifying your identity...\nYou are not my master Naup!\nYou are just User...\n> Success!!\n[User@FFAM-000000]Start...\n[User@FFAM-000001]Installing package...\n[User@FFAM-000002]Connect to FFAM system...\n[User@FFAM-000003]All requirement already satisfied \n[User@FFAM-000004]Try to find Flag...\n[User@FFAM-000005]Try to get shell...\n";
+var additionalText = "I found two documents about flag.\nflag.txt\nflag...\n";
+var index = 0;
+
+function typeWriter(callback) {
+  if (index < text.length) {
+    consoleElement.innerHTML += text.charAt(index);
+    index++;
+    setTimeout(function() { typeWriter(callback); }, 50);
+  } else if (callback) {
+    callback();
+  }
+}
+
+function displayAdditionalText(color) {
+  var span = document.createElement('span');
+  span.className = color;
+  span.textContent = additionalText;
+  consoleElement.appendChild(span);
+
+  document.getElementById('userInputForm').style.display = 'block';
+}
+
+function writeyouinputonshell(userInputValue, color) {
+  text = "";
+  additionalText = "";
+  additionalText += "\n[User@FFAM]" + userInputValue;
+  typeWriter(function() {
+    displayAdditionalText('blue-text');
+  });
+}
+
+typeWriter(function() {
+  displayAdditionalText('green-text');
+});
+
+
+  var userInput = document.getElementById('userInput');
+
+  userInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+      
+      var userInputValue = userInput.value;
+      console.log("[User@FFAM]", userInputValue);
+      
+      fetch('/exe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userInput: userInputValue}),
+      })
+      .then(response => response.text())
+      .then(data => {
+        writeyouinputonshell(userInputValue+"\n"+data)
+        console.log(data);
+      })
+      .catch((error) => {
+        writeyouinputonshell(userInputValue+"\n"+data)
+        console.error(error);
+      });
+
+      userInput.value = ''; 
+    }
+  });
+});
+
+</script>
+</body>
+</html>

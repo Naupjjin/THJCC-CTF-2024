@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FFAM</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+<body>
+    <h1>
+        <pre>
+            _   _____   __  ______ _       ____________ _____ __  ____  __________    __ 
+            / | / /   | / / / / __ \ |     / / ____/ __ / ___// / / / / / / ____/ /   / / 
+           /  |/ / /| |/ / / / /_/ / | /| / / __/ / __  \__ \/ /_/ / /_/ / __/ / /   / /  
+          / /|  / ___ / /_/ / ____/| |/ |/ / /___/ /_/ /__/ / __  / __  / /___/ /___/ /___
+         /_/ |_/_/  |_\____/_/     |__/|__/_____/_____/____/_/ /_/_/ /_/_____/_____/_____/
+                                                                                          
+        </pre>
+    </h1>
+
+<div id="console"></div>
+
+<form id="userInputForm" style="display:none;">
+    <div id="userInputWrapper" style="display:flex; align-items:center; background-color: black;">
+        <span style="color: rgb(159, 188, 255); margin-right: 8px;">[User@FFAM]</span>
+        <input type="text" id="userInput" name="userInput" required
+          style="flex-grow:1; background-color: black; color: rgb(159, 188, 255); border: none; outline: none;">
+      </div>
+      
+</form>
+
+<div id="response"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+var consoleElement = document.getElementById('console');
+var text = "\nHere is webshell\nBUT you can't use some characters and  payload length must be less than five characters!";
+var additionalText = "\n\nSHELL~\n";
+var index = 0;
+
+function typeWriter(callback) {
+  if (index < text.length) {
+    consoleElement.innerHTML += text.charAt(index);
+    index++;
+    setTimeout(function() { typeWriter(callback); }, 50);
+  } else if (callback) {
+    callback();
+  }
+}
+
+function displayAdditionalText(color) {
+  var span = document.createElement('span');
+  span.className = color;
+  span.textContent = additionalText;
+  consoleElement.appendChild(span);
+
+  document.getElementById('userInputForm').style.display = 'block';
+}
+
+function writeyouinputonshell(userInputValue, color) {
+  text = "";
+  additionalText = "";
+  additionalText += "\n[User@FFAM-webshell]" + userInputValue;
+  typeWriter(function() {
+    displayAdditionalText('blue-text');
+  });
+}
+
+typeWriter(function() {
+  displayAdditionalText('green-text');
+});
+
+
+  var userInput = document.getElementById('userInput');
+
+  userInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+      
+      var userInputValue = userInput.value;
+      console.log("[User@FFAM-webshell]", userInputValue);
+      
+      fetch('/webshellexe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"cmd": userInputValue}),
+      })
+      .then(response => response.text())
+      .then(data => {
+        writeyouinputonshell(userInputValue+"\n"+data)
+        console.log(data);
+      })
+      .catch((error) => {
+        writeyouinputonshell(userInputValue+"\n"+error)
+        console.error(error);
+      });
+
+      userInput.value = ''; 
+    }
+  });
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: black;
+}
+#console {
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(159, 188, 255);
+    padding: 20px;
+    white-space: pre;
+    overflow-wrap: break-word;
+}
+#console2 {
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(143, 255, 126);
+    padding: 20px;
+    white-space: pre;
+    overflow-wrap: break-word;
+}
+.red-text {
+    color: red;
+}
+.green-text {
+    color: rgb(143, 255, 126);
+}
+.blue-text {
+    color: rgb(159, 188, 255);
+}
+#userInputForm {
+    display: none; /* 默认隐藏，通过JS来显示 */
+}
+  
+#userInput, #userInputForm button {
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+}
+  
+#userInputWrapper {
+    display: flex;
+    align-items: center;
+    background-color: black;
+}
+  
+#userInputWrapper span {
+    color: rgb(119, 160, 255);
+    margin-right: 8px;
+}
+  
+#userInput {
+    flex-grow: 1;
+    background-color: black;
+    color: rgb(119, 160, 255);
+    border: none;
+    outline: none;
+}
+h1 pre {
+    color: green;
+}

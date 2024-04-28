@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /FFMT
+Disallow: /ShopAboutComputerEquipment 
+Disallow: /shell 
+Disallow: /webshell
+
+<!--Redeem code:NaupRedeemCode-->

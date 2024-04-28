@@ -1,0 +1,1 @@
+FLAG='THJCC{SSS_1s_a_c001_w2y_t0_pr0t3c7_s3c23t}'

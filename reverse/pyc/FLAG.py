@@ -1,0 +1,1 @@
+FLAG=b"THJCC{pyc_rev3r3e_C3n_u32_on1i5e_t0Ol}"
