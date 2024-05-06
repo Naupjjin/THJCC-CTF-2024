@@ -5,7 +5,9 @@
 # Crypto
 ## JPG^PNG=?
 tag: Crypto medium
+
 Open area solving: 17/226
+
 Official area solving: 16/84
 
 ## 《SSS.GRIDMAN》
